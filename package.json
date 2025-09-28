@@ -1,7 +1,7 @@
 {
-  "name": "chai-backend",
+  "name": "videotube",
   "version": "1.0.0",
-  "description": "a backend at chai aur code channel - youtube",
+  "description": "youtube clone fullstack",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -9,14 +9,13 @@
   },
   "keywords": [
     "javascript",
-    "backend",
-    "chai"
+    "backend"
   ],
   "author": "Yash",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^3.0.1",
-    "prettier": "^3.0.3"
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2"
   },
   "dependencies": {
     "dotenv": "^16.6.1",
