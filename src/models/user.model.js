@@ -11,7 +11,8 @@ const userSchema = new Schema(
         coverImage: {type: String},
         watchHistory: [{type: mongoose.Schema.Types.ObjectId, ref: "Video"}],
         password: {type: String, required: [true, "Password is required"]},
-        refreshToken: {type: String, required: true}
+        // refreshToken is optional; it will be set only after a login / token rotation event
+        refreshToken: {type: String, default: undefined}
     }, {timestamps: true}
 )
 
