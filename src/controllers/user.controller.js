@@ -170,5 +170,31 @@ const refreshAccessToken = asyncHandler(async (req, res)=>{
     
 });
 
-export {registerUser, loginUser, logoutUser, refreshAccessToken};
+const changeCurrentPassword = asyncHandler(async (req, res)=>{
+    const {oldPassword, newPassword} = req.body;
+    
+    if (!oldPassword || !newPassword){
+        throw new ApiError(400, "Both old and new passwords are required");
+    }
+    
+    const user = await findById(req.user?._id);
+    const isPasswordCorrect = await user.isPasswordCorrect(oldPassword);
+    if(!isPasswordCorrect){
+        throw new ApiError(401, "Old password is incorrect");
+    }
+
+    user.password = newPassword; // already hased in pre-save hook
+    await user.save({validateBeforeSave: false});
+    return res.status(200).json(new ApiResponse(200, null, "Password changed successfully"));
+});
+
+const getCurrentUser = asyncHandler(async (req, res)=>{
+    return res.status(200).json(200, req.user, "Current user fetched successfully")
+});   
+
+const updateAccountDetails = asyncHandler(async (req, res)=>{
+    const {fullName, email} = req.body;
+});
+
+export {registerUser, loginUser, logoutUser, refreshAccessToken, changeCurrentPassword, getCurrentUser};
 // i --- IGNORE ---
